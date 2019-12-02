@@ -1,0 +1,30 @@
+{
+  "name": "upload-server",
+  "version": "1.0.0",
+  "description": "upload needed files",
+  "main": "app.js",
+  "scripts": {
+    "dev": "egg-bin dev",
+    "deploy": "npm i --production && eggctl stop --title=upload-server && eggctl start --workers=4 --port=3000 --title=x-console --daemon",
+    "lint": "eslint app config --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyj1991/upload-server.git"
+  },
+  "author": "hyj1991",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyj1991/upload-server/issues"
+  },
+  "homepage": "https://github.com/hyj1991/upload-server#readme",
+  "dependencies": {
+    "egg": "^2.25.0",
+    "egg-scripts": "^2.11.1"
+  },
+  "devDependencies": {
+    "egg-bin": "^4.14.0",
+    "eslint": "^6.7.2",
+    "eslint-config-egg": "^7.5.1"
+  }
+}
