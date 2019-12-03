@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "egg-bin dev",
-    "deploy": "npm i --production && eggctl stop --title=upload-server && eggctl start --workers=4 --port=3000 --title=x-console --daemon",
+    "deploy": "npm i --production && eggctl stop --title=upload-server && eggctl start --workers=4 --port=3000 --title=upload-server --daemon",
     "lint": "eslint app config --fix"
   },
   "repository": {
@@ -20,7 +20,8 @@
   "homepage": "https://github.com/hyj1991/upload-server#readme",
   "dependencies": {
     "egg": "^2.25.0",
-    "egg-scripts": "^2.11.1"
+    "egg-scripts": "^2.11.1",
+    "egg-view-ejs": "^2.0.0"
   },
   "devDependencies": {
     "egg-bin": "^4.14.0",

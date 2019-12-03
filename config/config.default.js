@@ -27,5 +27,11 @@ module.exports = () => {
     mode: 'file',
   };
 
+  config.view = {
+    mapping: {
+      '.html': 'ejs'
+    }
+  }
+
   return config;
 };
