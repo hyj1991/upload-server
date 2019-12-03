@@ -14,11 +14,10 @@ module.exports = () => {
     },
   };
 
-  config.uploadKey = {
-
-  };
+  config.uploadKey = {};
 
   config.saveDir = path.join(os.homedir(), 'bindings/');
+  config.saveDirTarGz = path.join(os.homedir(), 'bindings.tar.gz/');
 
   config.multipart = {
     fileSize: '4mb',

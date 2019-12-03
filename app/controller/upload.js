@@ -1,10 +1,12 @@
 'use strict';
 
 const fs = require('fs');
+const cp = require('child_process');
 const path = require('path');
 const promisify = require('util').promisify;
 const mkdir = promisify(fs.mkdir);
 const copyFile = promisify(fs.copyFile);
+const exec = promisify(cp.exec);
 const crypto = require('crypto');
 const Controller = require('egg').Controller;
 
@@ -53,7 +55,7 @@ class UploadController extends Controller {
       return;
     }
 
-    // upload to oss
+    // save file
     const file = ctx.request.files[0];
     const dest = path.join(config.saveDir,
       `v${version}`,
@@ -62,8 +64,17 @@ class UploadController extends Controller {
     await mkdir(path.dirname(dest), { recursive: true });
     await copyFile(file.filepath, dest);
 
-    ctx.body = { ok: true };
+    // save file gz
+    const gzName = `node-v${modules}-${platform}-${arch}.tar.gz`;
+    const destGz = path.join(config.saveDirTarGz,
+      `v${version}`, gzName);
+    const tmpfilepath = path.join(path.dirname(file.filepath), filename);
+    await copyFile(file.filepath, tmpfilepath);
+    await exec(`tar -cvf ${gzName}  ./${filename}`, { cwd: path.dirname(tmpfilepath) });
+    await mkdir(path.dirname(destGz), { recursive: true });
+    await copyFile(path.join(path.dirname(file.filepath), gzName), destGz);
 
+    ctx.body = { ok: true };
   }
 }
 
