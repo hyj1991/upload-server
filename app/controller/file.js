@@ -28,7 +28,7 @@ class FileController extends Controller {
     }
 
     const gzName = `${version}.tar.gz`;
-    await exec(`tar -cvf ${gzName}  ./`, { cwd: path.dirname(versionPath) });
+    await exec(`tar -cvf ${gzName}  ./${version}`, { cwd: path.dirname(versionPath) });
     const versionTarGz = path.join(config.saveDir, gzName);
     if (!await exists(versionTarGz)) {
       ctx.body = { ok: false, message: 'gzip failed.' };
