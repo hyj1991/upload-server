@@ -13,7 +13,7 @@ class FileController extends Controller {
   async index() {
     const { ctx, ctx: { app: { config } } } = this;
     let versions = await readdir(config.saveDir);
-    versions = versions.filter(v => !v.includes('tar.gz'));
+    versions = versions.filter(v => !v.includes('tar.gz') && !v.includes('-prepare'));
     await ctx.render('file', { versions });
   }
 
